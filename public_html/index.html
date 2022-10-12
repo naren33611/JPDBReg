@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en">
+    <head>
+        <title>Invente Hack Registration</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://login2explore.com/jpdb/resources/js/0.0.4/jpdb-commons.js"​></script>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Invente Hack Registration</h2>
+            <form id="stuForm" method="post">
+                <div class="form-group">
+                  
+                    <span><label for="stuId">Student ID:</label> <label id="stuIdMsg"></label></span>
+                            <input type="text" class="form-control" name="stuId" id="stuId"
+                                   placeholder="Enter Student ID" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="stuName">Student Name:</label>
+                                <input type="text" class="form-control" id="stuName"
+                                       placeholder="Enter Student Name" name="stuName">
+                            </div>
+                            <div class="form-group">
+                                <label for="stuEmail">Email:</label>
+                                <input type="email" class="form-control" id="stuEmail"
+                                       placeholder="Enter Student Email" name="stuEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="stuMobile">Mobile:</label>
+                                <input type="number" class="form-control" id="stuMobile"
+                                       placeholder="Enter Student Mobile" name="stuMobile">
+                            </div>
+                            <input type="button" class="btn btn-primary" id="stuSave" value="Save"
+                                   onclick="saveStudent();">
+                            </form>
+                            </div>
+                            <script>
+                                $("#stuId").focus();
+                                function validateAndGetFormData() {
+                                    var stuIdVar = $("#stuId").val();
+                                    if (stuIdVar === "") {
+                                        alert("Student ID Required Value");
+                                        $("#stuId").focus();
+                                        return "";
+                                    }
+                                    var stuNameVar = $("#stuName").val();
+                                    if (stuNameVar === "") {
+                                        alert("Student Name is Required Value");
+                                        $("#stuName").focus();
+                                        return "";
+                                    }
+                                    var stuEmailVar = $("#stuEmail").val();
+                                    if (stuEmailVar === "") {
+                                        alert("Student Email is Required Value");
+                                        $("#stuEmail").focus();
+                                        return "";
+                                    }
+                                    var stuMobileVar = $("#stuMobile").val();
+                                    if (stuMobileVar === "") {
+                                        alert("Student Mobile is Required Value");
+                                        $("#stuMobile").focus();
+                                        return "";
+                                    }
+                                    var jsonStrObj = {
+                                        stuId: stuIdVar,
+                                        stuName: stuNameVar,
+                                        stuEmail: stuEmailVar,
+                                        stuMobile: stuMobileVar,
+                                    };
+                                    return JSON.stringify(jsonStrObj);
+                                }
+                        
+                                function resetForm() {
+                                    $("#stuId").val("")
+                                    $("#stuName").val("");
+                                    $("#stuEmail").val("");
+                                    $("#stuMobile").val("");
+                                    $("#stuId").focus();
+                                }
+                                function saveStudent() {
+
+                                    var jsonStr = validateAndGetFormData();
+                                    if (jsonStr === "") {
+                                        return;
+                                    }
+                                    var putReqStr = createPUTRequest("90937727|-31949297234629114|90941986",
+                                            jsonStr, "STUDENT", "STU-REL");
+                                    alert(putReqStr);
+                                    jQuery.ajaxSetup({async: false});
+                                    var resultObj = executeCommandAtGivenBaseUrl(putReqStr,"http://api.login2explore.com:5577", "/api/iml");
+                                    alert(JSON.stringify(resultObj));
+                                    jQuery.ajaxSetup({async: true});
+                                    resetForm();
+                                }
+                            </script>
+                            </body>
+                            </html>
